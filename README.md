@@ -1,6 +1,6 @@
 # ditteflink-website
 
-### Installation
+## Installation
 npm install
 npm run start
 
