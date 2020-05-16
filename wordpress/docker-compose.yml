@@ -11,18 +11,26 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
+    networks:
+      - wordpress
 
   wordpress:
     depends_on:
       - db
     image: wordpress:latest
     ports:
+      # her mapper jeg port 80 til at køre på 8000 så jeg har adgang fra min lokale maskine på localhost:8000
       - "8000:80"
     restart: always
+    # her fortæller jeg docker at jeg ønsker filerne gemt i en mappe her ved siden af yml filen
+    volumes: ["./:/var/www/html"]
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
+    networks: -wordpress
+networks:
+  wordpress:
 volumes:
-  db_data: {}
+  db_data:
