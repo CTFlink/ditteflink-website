@@ -2,10 +2,10 @@
   "name": "ditteflink-website",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next",
+    "dev": "nodemon server.js",
     "build": "next build",
     "start": "next start"
   },
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/CTFlink/ditteflink-website#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "next": "^9.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

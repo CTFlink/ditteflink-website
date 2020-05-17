@@ -1,14 +1,15 @@
 const next = require("next");
+const express = require("express");
 const wooConfig = require("./wooConfig");
+const WooCommerceAPI = require("woocommerce-api");
 
 const port = 3000;
-const WooCommerceAPI = require("woocommerce-api");
 // her tjekker jeg om vi er ude af production
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 
 const WooCommerce = new WooCommerceAPI({
-  url: "http://localhost:8000",
+  url: wooConfig.siteURL,
   consumerKey: wooConfig.consumerKey,
   consumerSecret: wooConfig.consumerSecret,
   wpAPI: true,
@@ -24,18 +25,19 @@ app
   .then(() => {
     const server = express();
 
+    //Her definerer jeg mit endpoint
     server.get("/getProducts", (req, res) => {
       WooCommerce.get("products", function (err, data, res) {
         console.log(res);
       });
     });
 
-    //Her siger jeg at alle routes der ikke håndteres af express js skal køres i next.js
+    //Her siger jeg at alle routes der ikke er defineret af express js skal køres i next.js
     server.get("*", (req, res) => {
       return handle(req, res);
     });
 
-    server.lister(port, (err) => {
+    server.listen(port, (err) => {
       if (err) {
         throw err;
       }
