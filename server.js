@@ -2,13 +2,14 @@
 const { createServer } = require("http");
 const { parse } = require("url");
 const next = require("next");
+const wooConfig = require("./wooConfig");
 
 const WooCommerceAPI = require("woocommerce-api");
 
 const WooCommerce = new WooCommerceAPI({
   url: "http://localhost:8000",
-  consumerKey: "ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-  consumerSecret: "cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  consumerKey: wooConfig.consumerKey,
+  consumerSecret: wooConfig.consumerSecret,
   wpAPI: true,
   version: "wc/v1",
 });
