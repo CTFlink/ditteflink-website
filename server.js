@@ -26,9 +26,9 @@ app
     const server = express();
 
     //Her definerer jeg mit endpoint
-    server.get("/getProducts", (req, res) => {
+    server.get("/getproducts", (req, response) => {
       WooCommerce.get("products", function (err, data, res) {
-        console.log(res);
+        response.json(JSON.parse(res));
       });
     });
 
