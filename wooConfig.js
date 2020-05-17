@@ -1,3 +1,5 @@
+// jeg gemmer nøglerne her for at det ikke er så nemt at hacke
+
 const wooConfig = {
   siteURL: "http://localhost:8000",
   consumerKey: "ck_de2f2986c72c73e21cddd57275b38d0aeb6ecfd5",
