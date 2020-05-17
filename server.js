@@ -1,10 +1,11 @@
-// server.js
-const { createServer } = require("http");
-const { parse } = require("url");
 const next = require("next");
 const wooConfig = require("./wooConfig");
 
+const port = 3000;
 const WooCommerceAPI = require("woocommerce-api");
+// her tjekker jeg om vi er ude af production
+const dev = process.env.NODE_ENV !== "production";
+const app = next({ dev });
 
 const WooCommerce = new WooCommerceAPI({
   url: "http://localhost:8000",
@@ -14,29 +15,34 @@ const WooCommerce = new WooCommerceAPI({
   version: "wc/v1",
 });
 
-// her tjekker jeg om vi er ude af production
-const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
-
 // her opsætter vi en next.js handler der tager over hvis der er routes der ikke er defineret af express
 const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
-  createServer((req, res) => {
-    // Be sure to pass `true` as the second argument to `url.parse`.
-    // This tells it to parse the query portion of the URL.
-    const parsedUrl = parse(req.url, true);
-    const { pathname, query } = parsedUrl;
+//Her laver jeg en instans af en express application
+app
+  .prepare()
+  .then(() => {
+    const server = express();
 
-    if (pathname === "/a") {
-      app.render(req, res, "/b", query);
-    } else if (pathname === "/b") {
-      app.render(req, res, "/a", query);
-    } else {
-      handle(req, res, parsedUrl);
-    }
-  }).listen(3000, (err) => {
-    if (err) throw err;
-    console.log("> Ready on http://localhost:3000");
+    server.get("/getProducts", (req, res) => {
+      WooCommerce.get("products", function (err, data, res) {
+        console.log(res);
+      });
+    });
+
+    //Her siger jeg at alle routes der ikke håndteres af express js skal køres i next.js
+    server.get("*", (req, res) => {
+      return handle(req, res);
+    });
+
+    server.lister(port, (err) => {
+      if (err) {
+        throw err;
+      }
+      console.log(`Ready on ${port}`);
+    });
+  })
+  .catch((ex) => {
+    console.error(ex.stack);
+    process.exit(1);
   });
-});
