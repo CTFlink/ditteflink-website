@@ -5,7 +5,7 @@
 import Layout from "../components/Layout";
 import fetch from "isomorphic-unfetch";
 import clientConfig from "../client-config";
-import Product from "../components/Products";
+import Product from "../components/Product";
 
 const Index = (props) => {
   //her trækker jeg data fra products objectet via destructoring
@@ -13,7 +13,7 @@ const Index = (props) => {
 
   return (
     <Layout>
-      <div className="ProductContainer">
+      <div className="product-container">
         {products.length
           ? products.map((product) => (
               <Product key={product.id} product={product} />

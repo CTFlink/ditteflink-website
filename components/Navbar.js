@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <a className="navbar-brand" href="#">
-        Navbar
+        Ditte Flink Design
       </a>
       <button
         className="navbar-toggler"
@@ -28,12 +28,12 @@ function Navbar() {
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
-              Features
+              Webshop
             </a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
-              Pricing
+              Designer
             </a>
           </li>
           <li className="nav-item">

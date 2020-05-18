@@ -23,7 +23,7 @@ const Product = (props) => {
         <div className="card-body">
           <h4 className="card-title">Card title</h4>
           <h6 className="card-subtitle mb-2 text-muted">{product.price}</h6>
-          <a className="btn btn-secondary" href="#">
+          <a className="btn btn-secondary text-center" href="#">
             View
           </a>
           <a href="#" className="btn btn-primary">
