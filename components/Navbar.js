@@ -1,8 +1,10 @@
-const Nav = () => {
+import React from "react";
+
+function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <a className="navbar-brand" href="#">
-        Ditte Flink Design
+        Navbar
       </a>
       <button
         className="navbar-toggler"
@@ -16,7 +18,7 @@ const Nav = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <div className="collapse navbar-collapse" id="navbarColor01">
+      <div className="navbar-collapse collapse show" id="navbarColor01">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
             <a className="nav-link" href="#">
@@ -25,12 +27,7 @@ const Nav = () => {
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
-              Webshop
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Dressmaker
+              Features
             </a>
           </li>
           <li className="nav-item">
@@ -57,6 +54,6 @@ const Nav = () => {
       </div>
     </nav>
   );
-};
+}
 
-export default Nav;
+export default Navbar;

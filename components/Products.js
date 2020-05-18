@@ -8,10 +8,10 @@ const Product = (props) => {
           src={product.images[0].src}
           alt="Card image"
           style={{
-            margin: "2px;",
-            height: "180px;",
-            width: "100px;",
-            display: "block;",
+            margin: "2px",
+            height: "180px",
+            width: "100px",
+            display: "block",
           }}
         />
         <div className="card-body">
