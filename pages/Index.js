@@ -6,6 +6,7 @@ import Layout from "../components/Layout";
 import fetch from "isomorphic-unfetch";
 import clientConfig from "../client-config";
 import Product from "../components/Products";
+
 const Index = (props) => {
   //her trækker jeg data fra products objectet via destructoring
   const { products } = props;
