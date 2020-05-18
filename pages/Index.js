@@ -5,9 +5,20 @@
 import Layout from "../components/Layout";
 import fetch from "isomorphic-unfetch";
 import clientConfig from "../client-config";
+import Product from "../components/Products";
+const Index = (props) => {
+  //her trækker jeg data fra products objectet via destructoring
+  const { products } = props;
 
-const Index = () => {
-  return <Layout>Hello World</Layout>;
+  return (
+    <Layout>
+      {products.length
+        ? products.map((product) => (
+            <Product key={product.id} product={product} />
+          ))
+        : ""}
+    </Layout>
+  );
 };
 
 Index.getInitialProps = async () => {

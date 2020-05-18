@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/CTFlink/ditteflink-website#readme",
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "express": "^4.17.1",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.4.0",
