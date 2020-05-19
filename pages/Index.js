@@ -3,11 +3,34 @@
 // Det er en convention i React at Components starter med Stort
 
 import Layout from "../components/Layout";
-import fetch from "isomorphic-unfetch";
-import clientConfig from "../client-config";
+import client from "./../components/ApolloClient";
 import Product from "../components/Product";
+import gql from "graphql-tag";
+
+const PRODUCT_QUERY = gql`
+  query {
+    products(first: 20) {
+      nodes {
+        id
+        productId
+        averageRating
+        slug
+        description
+        image {
+          uri
+          title
+          srcSet
+          sourceUrl
+        }
+      }
+      name
+      price
+    }
+  }
+`;
 
 const Index = (props) => {
+  console.warn(props);
   //her trækker jeg data fra products objectet via destructoring
   const { products } = props;
 
@@ -25,11 +48,17 @@ const Index = (props) => {
 };
 
 Index.getInitialProps = async () => {
-  const res = await fetch(`${clientConfig.siteURL}/getproducts`);
-  const productsData = await res.json();
+  // ---Dette er uddateret fordi jeg er gået over til at bruge graphql med Apollo client
+  // const res = await fetch(`${clientConfig.siteURL}/getproducts`);
+  // const productsData = await res.json();
+  // return {
+  //   products: productsData,
+  // };
+
+  const result = await client.query({ query: PRODUCT_QUERY });
 
   return {
-    products: productsData,
+    products: result.products.nodes,
   };
 };
 export default Index;
