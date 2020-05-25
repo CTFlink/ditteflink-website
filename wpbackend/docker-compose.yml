@@ -1,0 +1,39 @@
+version: "3.3"
+
+services:
+  # Database
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpresspassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - ditteflinkwpsite
+
+  # Wordpress
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    #her mapper jeg port 80 til at køre ind over port 8008
+    ports:
+      - "8008:80"
+    restart: always
+    # Her fortæller jeg docker at den skal hente filerne ned på drevet i en lokal mappe kaldet wpbackend
+    volumes: ["./:/var/www/html"]
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    networks:
+      - ditteflinkwpsite
+networks:
+  ditteflinkwpsite:
+volumes:
+  db_data: {}
