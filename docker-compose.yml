@@ -35,9 +35,10 @@ services:
     ports:
       - "8000:80"
     restart: always
-    volumes: ["./:/var/www/html"]
+    # Her fortæller jeg docker at den skal hente filerne ned på drevet i en mappe kaldet WPbackend
+    volumes: ["./WPbackend/:/var/www/html"]
     environment:
-      WORDPRESS_DB_HOST: db:3310
+      WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
     networks:
